@@ -1,0 +1,43 @@
+# Spring Cloud - Config Server
+## give name for discovery
+spring:
+    application:
+        name: configuration-service
+## URI to config-server
+# spring:
+#	cloud:
+#		config:
+#			uri: http://localhost:8080/
+
+application:
+    finalName: configurations-dev
+## base path to migration script
+    property:
+        mongobee:
+            changelog:
+                path: inspectit.rocks.marketplace.configuration.service.migration.mongobee
+                isEnabled: true
+
+# set server port
+server:
+    port: 8080
+
+# Application Properties
+marketplace:
+    application:
+        name: ${group}.\${application.finalName}
+        version: ${version}
+
+# Database
+spring:
+    data:
+        mongodb:
+            uri: mongodb://localhost/
+            database: marketplace-dev
+
+# disable security for actuator
+## only for dev
+management:
+    security:
+        enabled: false
+
