@@ -21,7 +21,7 @@ application:
         mongobee:
             changelog:
                 path: inspectit.rocks.marketplace.configuration.service.migration.mongobee
-                isEnabled: true
+                enabled: true
 
 # set server port
 server:
