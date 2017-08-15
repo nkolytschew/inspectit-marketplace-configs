@@ -8,6 +8,11 @@ spring:
 #	cloud:
 #		config:
 #			uri: http://localhost:8080/
+## Database
+    data:
+        mongodb:
+            uri: mongodb://localhost/
+            database: marketplace
 
 application:
     finalName: configurations
@@ -28,12 +33,6 @@ marketplace:
         name: ${group}.\${application.finalName}
         version: ${version}
 
-# Database
-spring:
-    data:
-        mongodb:
-            uri: mongodb://localhost/
-            database: marketplace
 
 # disable security for actuator
 ## only for dev
