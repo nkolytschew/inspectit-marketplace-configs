@@ -11,6 +11,11 @@ server:
 eureka:
     instance:
         hostname: localhost
+        preferIpAddress: true
+## don't change the interval or you might break the self preservation feature of eureka-server
+#        leaseRenewalIntervalSeconds: 30
+## don' set this value lower than 30
+        leaseExpirationDurationInSeconds: 30
     client:
         registerWithEureka: false
         fetchRegistry: false
