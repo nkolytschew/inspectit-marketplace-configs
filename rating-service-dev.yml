@@ -1,0 +1,41 @@
+# Spring Cloud - Config Server
+## give name for discovery
+spring:
+    application:
+        name: rating-service
+## URI to config-server
+# spring:
+#	cloud:
+#		config:
+#			uri: http://localhost:8080/
+## Database
+    data:
+        mongodb:
+            uri: mongodb://localhost/
+            database: marketplace-dev
+
+application:
+    finalName: rating-dev
+## base path to migration script
+    property:
+        mongobee:
+            changelog:
+                path: inspectit.rocks.marketplace.rating.service.migration.mongobee
+                enabled: true
+
+# set server port
+server:
+    port: 9990
+
+# Application Properties
+marketplace:
+    application:
+        name: ${group}.\${application.finalName}
+        version: ${version}
+
+# disable security for actuator
+## only for dev
+management:
+    security:
+        enabled: false
+
