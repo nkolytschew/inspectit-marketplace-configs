@@ -1,3 +1,9 @@
+
+# set server port
+server:
+    port: ${PORT:9080}
+    contextPath: /api/${application.finalName}
+
 # Spring Cloud - Config Server
 ## give name for discovery
 spring:
@@ -15,7 +21,7 @@ spring:
             database: marketplace-dev
 
 application:
-    finalName: configurations-dev
+    finalName: configuration-service-dev
 ## base path to migration script
     property:
         mongobee:
@@ -23,19 +29,17 @@ application:
                 path: inspectit.rocks.marketplace.configuration.service.migration.mongobee
                 enabled: true
 
-# set server port
-server:
-    port: 9999
-
-# Application Properties
-marketplace:
-    application:
-        name: ${group}.\${application.finalName}
-        version: ${version}
-
 # disable security for actuator
 ## only for dev
 management:
     security:
         enabled: false
 
+# setup eureka if context-path is used
+eureka:
+    instance:
+        metadataMap:
+            management:
+                context-path: ${server.contextPath}
+        statusPageUrlPath: ${server.contextPath}/info
+        healthCheckUrlPath: ${server.contextPath}/health

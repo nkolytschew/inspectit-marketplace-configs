@@ -1,11 +1,7 @@
+
 # default
 server:
-    port: 8761
-
-# spring:
-#  application:
-#    name: marketplace-service-discovery
-
+    port: ${PORT:8761}
 
 # eureka discovery properties
 eureka:
@@ -21,3 +17,5 @@ eureka:
         fetchRegistry: false
         serviceUrl:
             defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    server:
+        waitTimeInMsWhenSyncEmpty: 0

@@ -1,3 +1,8 @@
+
+# set server port
+server:
+    port: ${PORT:81}
+
 # Spring Cloud - Config Server
 ## give name for discovery
 spring:
@@ -15,27 +20,10 @@ spring:
             database: rating
 
 application:
-    finalName: ratings
+    finalName: rating
 ## base path to migration script
     property:
         mongobee:
             changelog:
                 path: inspectit.rocks.marketplace.rating.service.migration.mongobee
                 enabled: true
-
-# set server port
-server:
-    port: 81
-
-# Application Properties
-marketplace:
-    application:
-        name: ${group}.\${application.finalName}
-        version: ${version}
-
-# disable security for actuator
-## only for dev
-management:
-    security:
-        enabled: false
-

@@ -1,0 +1,31 @@
+
+zuul:
+##  Service will be mapped under the /api URI
+#    prefix: /api
+##  Uncomment to disable auto-registering all services read from Eureka
+    ignoredServices: '*'
+    routes:
+        configuration-service:
+            path: /api/configuration-service-dev/**
+#            user eureka serviceId instead of url
+##            url: http://localhost:9080
+            serviceId: configuration-service
+#            prefix necessary, because of server:contextPath
+            stripPrefix: false
+        rating-service:
+            path: /api/rating-service-dev/**
+            serviceId: rating-service
+            stripPrefix: false
+        web-client:
+            path: /**
+            serviceId: web-client
+            stripPrefix: false
+
+server:
+    port: ${PORT:8080}
+
+# disable security for actuator
+## only for dev
+management:
+    security:
+        enabled: false
