@@ -20,6 +20,10 @@ zuul:
             path: /**
             serviceId: web-client
             stripPrefix: false
+        auth-service:
+            path: /uaa/auth-service-dev/**
+            serviceId: auth-service
+            stripPrefix: false
 
 server:
     port: ${PORT:8080}

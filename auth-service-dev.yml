@@ -1,0 +1,63 @@
+
+# set server port
+server:
+    port: ${PORT:9999}
+    contextPath: /uaa/${application.finalName}
+
+# Spring Cloud - Config Server
+spring:
+    application:
+##       give name for discovery
+        name: auth-service
+#   DataBase configuration
+    datasource:
+        url: jdbc:postgresql://localhost:5432/marketplace-dev
+        username: postgres
+        password: secr3t
+#       disable database initialisation with Spring JDBC, enabled by default
+        initialize: false
+# validate the schema, no changes to the database
+# without it the application would start up even if the schema is not present
+    jpa:
+        hibernate:
+            ddl-auto: validate
+
+application:
+    finalName: auth-service-dev
+
+# Flyway
+flyway:
+    enabled: true
+# Useful when there is an already existing production schema:
+# Controls weather to a automatically call baseline when migrate is executed against a non-empty schema with no metadata table:
+# Only migrations above the baseLineVersion (default 1) will be applied
+# schema_version table is created
+    baseline-on-migrate: true
+
+security:
+    user:
+        name: user
+        password: secr3t
+## oauth security
+    oauth2:
+        client:
+            client-id: productclient
+            client-secret: secretkey
+            scope: read-products
+        authorization:
+            check-token-access: isAuthenticated()
+
+# disable security for actuator
+## only for dev
+management:
+    security:
+        enabled: false
+
+# setup eureka if context-path is used
+eureka:
+    instance:
+        metadataMap:
+            management:
+                context-path: ${server.contextPath}
+        statusPageUrlPath: ${server.contextPath}/info
+        healthCheckUrlPath: ${server.contextPath}/health
